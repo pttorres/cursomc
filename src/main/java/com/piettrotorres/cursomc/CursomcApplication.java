@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.piettrotorres.cursomc.domain.Categoria;
+import com.piettrotorres.cursomc.domain.Cidade;
+import com.piettrotorres.cursomc.domain.Estado;
 import com.piettrotorres.cursomc.domain.Produto;
 import com.piettrotorres.cursomc.repositories.CategoriaRepository;
+import com.piettrotorres.cursomc.repositories.CidadeRepository;
+import com.piettrotorres.cursomc.repositories.EstadoRepository;
 import com.piettrotorres.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -17,9 +21,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private EstadoRepository estadoRepository;
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -35,6 +42,16 @@ public class CursomcApplication implements CommandLineRunner {
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
 		
+		Estado e1 = new Estado(null, "São Paulo");
+		Estado e2 = new Estado(null, "Minas Gerais");
+		
+		Cidade c1 = new Cidade(null, "Uberlândia", e1);
+		Cidade c2 = new Cidade(null, "São Paulo", e1);
+		Cidade c3 = new Cidade(null, "Campinas", e2);
+
+		e1.getCidades().addAll(Arrays.asList(c1,c2));
+		e2.getCidades().addAll(Arrays.asList(c3));
+		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
 		
@@ -44,6 +61,9 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+		estadoRepository.saveAll(Arrays.asList(e1, e2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	}
 
 }
