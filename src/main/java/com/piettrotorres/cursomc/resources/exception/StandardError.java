@@ -1,6 +1,7 @@
 package com.piettrotorres.cursomc.resources.exception;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class StandardError implements Serializable{
 	
@@ -8,9 +9,9 @@ public class StandardError implements Serializable{
 	
 	private Integer status;
 	private String msg;
-	private Long timeStamp;
+	private LocalDateTime timeStamp;
 	
-	public StandardError(Integer status, String msg, Long timeStamp) {
+	public StandardError(Integer status, String msg, LocalDateTime timeStamp) {
 		super();
 		this.status = status;
 		this.msg = msg;
@@ -33,11 +34,11 @@ public class StandardError implements Serializable{
 		this.msg = msg;
 	}
 
-	public Long getTimeStamp() {
+	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Long timeStamp) {
+	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 	
