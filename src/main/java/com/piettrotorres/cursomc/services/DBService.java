@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.piettrotorres.cursomc.domain.Categoria;
@@ -52,6 +53,8 @@ public class DBService {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	private BCryptPasswordEncoder bpe;
 
 	public void instantiateDatabase() {
 
@@ -103,7 +106,7 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "São Paulo", est2);
 		Cidade c3 = new Cidade(null, "Campinas", est2);
 
-		Cliente cli1 = new Cliente(null, "Maria Silva", "piettro.alessandro@gmail.com", "14128815508", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria Silva", "piettro.alessandro@gmail.com", "14128815508", TipoCliente.PESSOAFISICA, bpe.encode("123"));
 		//	Cliente cl2 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36381755", TipoCliente.PESSOAFISICA)
 
 		cli1.getTelefones().addAll(Arrays.asList("31375454", "994015508"));
