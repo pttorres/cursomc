@@ -9,7 +9,6 @@ import com.piettrotorres.cursomc.domain.Pedido;
 
 public abstract class AbstractEmailService implements EmailService {
 	
-	
 	@Value("${default.sender}")
 	private String sender;
 
@@ -23,11 +22,11 @@ public abstract class AbstractEmailService implements EmailService {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setText(obj.getCliente().getEmail());
 		sm.setFrom(sender);
-		sm.setFrom("Pedido confirmado! Código: " + obj.getId());
+		sm.setTo(obj.getCliente().getEmail());
+		sm.setSubject("Pedido confirmado! Código: " + obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
 		sm.setText(obj.toString());
 		return sm;
 	}
-
 
 }
