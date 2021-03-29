@@ -2,6 +2,7 @@ package com.piettrotorres.cursomc.resources.exception;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class StandardError implements Serializable{
 	
@@ -9,13 +10,15 @@ public class StandardError implements Serializable{
 	
 	private Integer status;
 	private String msg;
-	private LocalDateTime timeStamp;
+//	private LocalDateTime timeStamp;
+	private String timeStamp;
+	
 	
 	public StandardError(Integer status, String msg, LocalDateTime timeStamp) {
 		super();
 		this.status = status;
 		this.msg = msg;
-		this.timeStamp = timeStamp;
+		this.timeStamp = timeStamp.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 	}
 
 	public Integer getStatus() {
@@ -34,11 +37,11 @@ public class StandardError implements Serializable{
 		this.msg = msg;
 	}
 
-	public LocalDateTime getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(LocalDateTime timeStamp) {
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 	
