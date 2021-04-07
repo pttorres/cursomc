@@ -15,9 +15,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.piettrotorres.cursomc.dto.CredenciaisDTO;
+
+import io.netty.handler.codec.http.cors.CorsConfig;
+import io.netty.handler.codec.http.cors.CorsConfigBuilder;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
@@ -54,6 +59,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String userName = ((UserSS) auth.getPrincipal()).getUsername();
 		String token = jwtUtil.generationToken(userName);
 		res.addHeader("Authorization", "Bearer "+ token);
+		res.addHeader("acess-control-expose-headers", "Authorization");
 
 	}
 	
